@@ -49,7 +49,7 @@ void scan_wifi_networks(){
 
 
 void setup() {
-
+  
     Serial.begin(9600);
     Serial.println("STARTING SETUP");
 
@@ -110,9 +110,6 @@ void setup() {
 
     // check the fingerprint of io.adafruit.com's SSL cert
     client.setFingerprint(fingerprint);
-  
-//    io = new AdafruitIO_WiFi(IO_USERNAME, IO_KEY, WIFI_SSID.c_str(), WIFI_PASS.c_str());
-//    co2_monitor_feed = io->feed(FEED_NAME);
 
     delay(2000);
     
@@ -123,15 +120,17 @@ void setup() {
     lcd.setCursor(0,1);
     lcd.print("SETUP: Complete");
     Serial.println("SETUP: Complete");  
-    
-
+    pinMode(TRANSISTOR_PIN, OUTPUT);
+    digitalWrite(TRANSISTOR_PIN, HIGH);
 
 }
 
 String update_wifi_status(){
   lcd.setCursor(0,0);
-  lcd.print("                "); // clear first row of lcd
+  
   if(WiFi.getMode() == WIFI_AP){
+        lcd.setCursor(0,0);
+        lcd.print("                "); // clear first row of lcd
         lcd.setCursor(0,0);
         lcd.print("WiFi: Hotspot");
         return "Hotspot";
@@ -143,6 +142,8 @@ String update_wifi_status(){
         return "Connected";
     }
     else{
+      lcd.setCursor(0,0);
+      lcd.print("                "); // clear first row of lcd
       lcd.setCursor(0,0);
       lcd.print("WiFi: Failed");
       return "Failed";
