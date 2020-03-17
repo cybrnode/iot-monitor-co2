@@ -19,6 +19,8 @@ void ICACHE_RAM_ATTR wifi_btn_isr(){
 
 void start_ap(){
     if (WiFi.getMode() != WIFI_AP){
+        lcd.setCursor(0,0);
+        lcd.print("Please Wait...  ");
         scan_wifi_networks(); // this sets the mode to WIFI_STA
         WiFi.mode(WIFI_AP);
         WiFi.softAP(AP_NAME);
@@ -53,7 +55,6 @@ void setup() {
     Serial.begin(9600);
     Serial.println("STARTING SETUP");
 
-    attachInterrupt(digitalPinToInterrupt(WIFI_BTN_PIN), wifi_btn_isr, CHANGE);
 
     storage.begin();
     dashboardUpdateEvent.begin(DASHBOARD_UPDATE_INTERVAL);
@@ -66,30 +67,25 @@ void setup() {
     lcd.setCursor(0,0);
     lcd.print("Connecting Wifi");
     delay(1000);
-
-    Serial.println(WiFi.getMode());
+    // 0      1       2     3 
+    /*"NULL", "STA", "AP", "STA+AP" */
     WiFi.softAPdisconnect (true);
-    Serial.println(WiFi.getMode());
-
     WiFi.mode(WIFI_STA);
     WiFi.disconnect();
+    delay(100);
 
     Serial.println("reading ssid,pass from storage...");
     WIFI_SSID = storage.readNextString();
     WIFI_PASS = storage.readNextString();
-
     Serial.println(
         String("Connecting to :\n\t")+"SSID:" + String(WIFI_SSID) + "\n\t"+
         "PASSWORD:" + String(WIFI_PASS)
     );
 
-    // Connect to WiFi access point.
-    Serial.print("Connecting to ");
-    Serial.println(WIFI_SSID);
-
     WiFi.begin(WIFI_SSID, WIFI_PASS);
     delay(2000);
 
+    // wait for 5 seconds or until wifi is connected...
     int x = 0;
     while ( x <= 5 ) {
       x++;
@@ -111,8 +107,6 @@ void setup() {
     // check the fingerprint of io.adafruit.com's SSL cert
     client.setFingerprint(fingerprint);
 
-    delay(2000);
-    
     pinMode(WIFI_BTN_PIN, INPUT); // declare pushbutton as input
     pinMode(PWM_PIN, INPUT);
 
@@ -120,54 +114,47 @@ void setup() {
     lcd.setCursor(0,1);
     lcd.print("SETUP: Complete");
     Serial.println("SETUP: Complete");  
-    pinMode(TRANSISTOR_PIN, OUTPUT);
-    digitalWrite(TRANSISTOR_PIN, HIGH);
+
+    attachInterrupt(digitalPinToInterrupt(WIFI_BTN_PIN), wifi_btn_isr, CHANGE);
 
 }
 
 String update_wifi_status(){
   lcd.setCursor(0,0);
-  
   if(WiFi.getMode() == WIFI_AP){
-        lcd.setCursor(0,0);
-        lcd.print("                "); // clear first row of lcd
-        lcd.setCursor(0,0);
-        lcd.print("WiFi: Hotspot");
+        lcd.print("WiFi: Hotspot   ");
         return "Hotspot";
     }
   else{
     if (WiFi.status() == WL_CONNECTED){
-        lcd.setCursor(0,0);
-        lcd.print("WiFi: Connected");
+        lcd.print("WiFi: Connected ");
         return "Connected";
     }
     else{
-      lcd.setCursor(0,0);
-      lcd.print("                "); // clear first row of lcd
-      lcd.setCursor(0,0);
-      lcd.print("WiFi: Failed");
+      lcd.print("WiFi: Failed    ");
       return "Failed";
     }
   }
 }
+
 void lcd_print_ppm(float ppm){
     lcd.clear();
     lcd.setCursor(0,1);
     lcd.print(String("CO2: ") + ppm + " ppm");
-    
 }
+
 void upload_ppm_to_dashboard(float ppm){
     Serial.println("uploading to dashboard");
     lcd.setCursor(0,0);
-    lcd.print("updating dashboard");
+    lcd.print("uploading ppm   ");
     if (!co2_monitor_feed.publish(ppm)) {
       lcd.setCursor(0,0);
-      lcd.print("publish failed!");
+      lcd.print("publish failed! ");
       Serial.println(F("publish failed!"));
       
     } else {
       lcd.setCursor(0,0);
-      lcd.print("publish OK!");
+      lcd.print("publish OK!     ");
       Serial.println(F("publish OK!"));
     }
 }
@@ -178,8 +165,9 @@ void loop() {
     }
     pwm_value = pulseIn(PWM_PIN, HIGH);
     ppm = pwm_value / 200.0;
-
+    
     Serial.println(ppm);
+
     lcd_print_ppm(ppm);
     update_wifi_status();
 
@@ -189,6 +177,7 @@ void loop() {
     }
 
     if ( WiFi.getMode() != WIFI_STA){
+      // if isn't in station mode... can't upload anyway
       return;
     }
 
@@ -196,7 +185,7 @@ void loop() {
     if (dashboardUpdateEvent.trigger()){
         MQTT_connect();
         upload_ppm_to_dashboard(ppm);
-        delay(1000); 
+        delay(200); 
         dashboardUpdateEvent.reset();
     }
 }

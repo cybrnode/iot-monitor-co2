@@ -8,7 +8,6 @@
 #define FEED_NAME "co2-monitor"
 
 const byte WIFI_BTN_PIN = D3;
-const byte TRANSISTOR_PIN = D6;
 const byte PWM_PIN = D5;
 
 const long DASHBOARD_UPDATE_INTERVAL = 60000;
