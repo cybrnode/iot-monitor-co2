@@ -11,7 +11,7 @@ void setup() {
 void loop() {
   // https://www.arduino.cc/reference/en/language/functions/advanced-io/pulsein/
   long duration = pulseIn(D5, HIGH, 2000000);
-  int value = duration / 20;
+  int value = duration / 200.0;
 
   Serial.println(value);
 }
