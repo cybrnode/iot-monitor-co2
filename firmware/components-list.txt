@@ -1,0 +1,8 @@
+Components
+1. TP4056
+2. Booste convertor
+3. ESP8266
+4. I2C Module
+5. 16 * 2 LCD
+6. CO2 Sensor
+
