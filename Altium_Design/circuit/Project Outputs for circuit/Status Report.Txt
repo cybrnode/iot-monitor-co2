@@ -1,0 +1,14 @@
+Output: Gerber Files
+Type  : Gerber
+From  : Variant [[No Variations]] of Project [circuit.PrjPcb]
+   Generated File[circuit.GBL]
+   Generated File[circuit.GG1]
+   Generated File[circuit.RUL]
+   Generated File[circuit.EXTREP]
+   Generated File[circuit.REP]
+
+
+Files Generated   : 5
+Documents Printed : 0
+
+Finished Output Generation At 3:14:30 AM On 6/18/2020
