@@ -1,10 +1,10 @@
 #include <ESP8266WiFi.h>
-#include <LiquidCrystal_I2C.h>
+#include <LiquidCrystal_I2C.h> // https://github.com/fdebrabander/Arduino-LiquidCrystal-I2C-library
 #include <StorageIO.h>
 #include <Event.h>
 #include <ESP8266WebServer.h>
 
-#include "Adafruit_MQTT.h"
+#include "Adafruit_MQTT.h"    // https://github.com/adafruit/Adafruit_MQTT_Library
 #include "Adafruit_MQTT_Client.h"
 
 #include "config.h"
