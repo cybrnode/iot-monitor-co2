@@ -1,0 +1,4 @@
+Added Component: Designator=NodeMCU(NodeMCU V1.0 ESP-12E)
+Added Pin To Net: NetName=+5 Pin=NodeMCU-SD0
+Added Member To Class: ClassName=circuit Member=Component NodeMCU NodeMCU V1.0 ESP-12E
+Added Room: Name=circuit
