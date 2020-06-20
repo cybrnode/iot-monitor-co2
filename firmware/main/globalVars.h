@@ -1,7 +1,8 @@
 ESP8266WebServer webServer(80);
 
 
-LiquidCrystal_I2C lcd(0x3F, 16, 2);
+//LiquidCrystal_I2C lcd(0x3F, 16, 2);
+LiquidCrystal_I2C lcd(0x27, 16, 2);
 StorageIO storage;
 Event dashboardUpdateEvent;
 

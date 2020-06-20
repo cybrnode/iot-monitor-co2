@@ -1,0 +1,30 @@
+Removed Pin From Net: NetName=POWER_INPUT Pin=Buck Cconvertor-1
+Removed Pin From Net: NetName=NetBuck Cconvertor_3 Pin=Buck Cconvertor-3
+Removed Pin From Net: NetName=D5 Pin=NodeMCU-D5
+Removed Pin From Net: NetName=NetBuck Cconvertor_3 Pin=Power_button-1
+Removed Pin From Net: NetName=+5 Pin=Power_button-2
+Removed Pin From Net: NetName=D5 Pin=Resistor-2
+Removed Pin From Net: NetName=D3 Pin=Sensor-8
+Removed Pin From Net: NetName=D5 Pin=WIFI_button-1
+Added Component: Designator=Regulator(RB7.6-15)
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageDescription"; Value = "Polarized Capacitor (Radial); 2 Leads"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "RB7.6-15"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published"; Value = "8-Jun-2000"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "440uF"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=NetBuck Cconvertor_3 Pin=Buck Cconvertor-1
+Added Pin To Net: NetName=+5 Pin=Buck Cconvertor-3
+Added Pin To Net: NetName=D5 Pin=NodeMCU-D8
+Added Pin To Net: NetName=POWER_INPUT Pin=Power_button-1
+Added Pin To Net: NetName=NetBuck Cconvertor_3 Pin=Power_button-2
+Added Pin To Net: NetName=+5 Pin=Regulator-1
+Added Pin To Net: NetName=GND Pin=Regulator-2
+Added Pin To Net: NetName=D3 Pin=Resistor-2
+Added Pin To Net: NetName=D5 Pin=Sensor-8
+Added Pin To Net: NetName=D3 Pin=WIFI_button-1
+Change Net Name : Old Net Name=D5 New Net Name=D8
+Change Net Name : Old Net Name=NetBuck Cconvertor_3 New Net Name=NetBuck Cconvertor_1
+Added Member To Class: ClassName=circuit Member=Component Regulator Cap Pol1
+Added Member To Class: ClassName=circuit Member=Component Resistor Component_1
