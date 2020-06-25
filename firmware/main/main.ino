@@ -113,7 +113,6 @@ void setup() {
   attachInterrupt(digitalPinToInterrupt(WIFI_BTN_PIN), wifi_btn_isr, CHANGE);
 
   iotGuru.setDebugPrinter(&Serial);
-  iotGuru.setNetworkClient(&client);
 }
 
 String update_wifi_status(){
@@ -164,7 +163,7 @@ void loop() {
 
   // if one minute passed since last update...update dashboard..
   if (dashboardUpdateEvent.trigger()){
-    iotGuru.sendMqttValue(nodeShortId, fieldName, ppm);
+    iotGuru.sendHttpValue(nodeKey, fieldName, ppm);
     
     delay(200); 
     dashboardUpdateEvent.reset();
