@@ -1,8 +1,13 @@
-#define AIO_SERVER      "io.adafruit.com"
-// Using port 8883 for MQTTS
-#define AIO_SERVERPORT  8883
-#define AIO_USERNAME    "huzaifah_asif_b"
-#define AIO_KEY         "aio_RvsY96s0FUHRedemdCZRr0Ejmq3Z"
+
+String userShortId    = "xxxxxxxxxxxxxxxxxxxxxx";
+String deviceShortId  = "yyyyyyyyyyyyyyyyyyyyyy";
+String deviceKey      = "zzzzzzzzzzzzzzzzzzzzzz";
+
+
+String nodeShortId    = "wwwwwwwwwwwwwwwwwwwwww";
+String fieldName      = "ffffNNNN";
+
+
 
 #define AP_NAME "CO2 HoT pro 1"
 #define FEED_NAME "co2-monitor"
